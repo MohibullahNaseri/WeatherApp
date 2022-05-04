@@ -1,0 +1,149 @@
+WindowManager:
+	FirstWindow:
+	SecondWindow:
+	ThirdWindow:
+	FinalWindow:
+
+<FirstWindow>:
+	name: "first"
+
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		canvas.before:
+            Color:
+                rgba: 255,255,225,0.7
+            BorderImage:
+                source: 'png.png'
+                size:root.width, root.height
+                pos:0,0
+
+        Button:
+			text: "Weather"
+			size_hint: .2, .1
+			pos_hint:{'x': 0., 'y': 0}
+			font_size: 20
+			on_release:
+			    app.root.current = "second"
+			    root.manager.transition.direction = "left"
+	    Button:
+			text: "Calculator"
+			size_hint: .2, .1
+			font_size: 20
+			pos_hint:{'x': 0., 'y': 0}
+			on_release:
+				app.root.current = "third"
+				root.manager.transition.direction = "left"
+		Button:
+			text: "Information"
+			size_hint: .2, .1
+			font_size: 20
+			pos_hint:{'x': 0., 'y': 0}
+			on_release:
+				app.root.current = "final"
+				root.manager.transition.direction = "left"
+
+<SecondWindow>:
+    city_name:city_name
+	name: "second"
+
+	BoxLayout:
+	    orientation: "horizontal"
+		size: root.width, root.height
+		canvas.before:
+            Color:
+                rgba: 255,255,225,0.7
+            BorderImage:
+                source: 'png.png'
+                size:root.width, root.height
+                pos: self.pos
+
+	Label:
+	    text: 'Enter Your City Name'
+	    font_size: 32
+        pos_hint:{'x': 0, 'y': 0.3}
+
+	TextInput:
+	    id: city_name
+        size_hint:.5, .13
+        pos_hint:{'x': 0.25, 'y': 0.6}
+	    text: ''
+	    font_size: 32
+
+	Button:
+	    text: 'Submit'
+	    size_hint:.2, .1
+	    pos_hint:{'x': 0.8, 'y': 0.001}
+	    on_press: root.out()
+
+	Button:
+	    text: 'Back'
+	    size_hint: .2, .1
+	    on_release:
+	        app.root.current = 'first'
+	        root.manager.transition.direction = 'right'
+
+<ThirdWindow>:
+    celsius: celsius
+	name: "third"
+	canvas.before:
+        Color:
+            rgba: 255,255,225,0.7
+        BorderImage:
+            source: 'png.png'
+            size:root.width, root.height
+            pos: self.pos
+    Label:
+	    text: 'Enter Temperature Degree in Celsius'
+	    font_size: 32
+        pos_hint:{'x': 0, 'y': 0.3}
+    TextInput:
+	    id: celsius
+        size_hint:.5, .13
+        pos_hint:{'x': 0.25, 'y': 0.6}
+	    text: ''
+	    font_size: 32
+
+    Button:
+	    text: 'To_°F'
+	    size_hint:.202, .1
+	    pos_hint:{'x': 0.599, 'y': 0.0}
+	    on_press: root.fahrenheit()
+        bold: True
+    Button:
+	    text: 'To_Kalvin'
+	    size_hint:.2, .1
+	    pos_hint:{'x': 0.8, 'y': 0}
+	    on_press: root.kalvin()
+        bold: True
+    Button:
+        text: 'Back'
+        size_hint: .19, .1
+        pos_hint:{'x': 0, 'y':0}
+        on_release:
+            app.root.current='first'
+            root.manager.transition.direction='right'
+
+<FinalWindow>:
+	name: "final"
+	Label:
+        text:'[color=#ff0f]From the [color=#0fff][b][size=20]Wikipedia[/size][/b][/color], the free encyclopedia\n\nThis article is about the atmospheric process. For the geological process, see Weathering.\nFor other uses, see Weather (disambiguation) and Weather systems (disambiguation). For the current year of weather, see Weather of 2022.\nWeather is the state of the atmosphere, describing for example the degree to which, it is hot or cold, wet or dry, calm or stormy, clear or cloudy.\nOn Earth, most weather phenomena occur in the lowest layer of the planets atmosphere, the troposphere,[2][3] just below the stratosphere.\nWeather refers to day-to-day temperature, precipitation, and other atmospheric conditions, whereas climate is the term for the averaging of atmospheric conditions over longer periods of time.\nWhen used without qualification, "weather" is generally understood to mean the weather of Earth.\nWeather is driven by air pressure, temperature, and moisture differences between one place and another.\nThese differences can occur due to the Suns angle at any particular spot, which varies with latitude.\nThe strong temperature contrast between polar and tropical air gives rise to the largest scale atmospheric circulations: the Hadley cell, the Ferrel cell, the polar cell, and the jet stream.\nWeather systems in the middle latitudes, such as extratropical cyclones, are caused by instabilities of the jet stream-flow. Because Earths axis is tilted relative to its\norbital plane (called the ecliptic), sunlight is incident at different angles at different times of the year.\nOn Earths surface, temperatures usually range ±40 °C (−40 °F to 104 °F) annually. Over thousands of years,\nchanges in Earths orbit can affect the amount and distribution of solar energy received by Earth, thus influencing long-term climate and global climate change.\nStudying how the weather works on other planets has been helpful in understanding how weather works on Earth.[/color]'
+        size: root.width, root.height
+        font_size: 16
+        markup:True
+        on_ref_press:
+            import webbrowser
+            webbrowser.open(args[1])
+        #pos_hint:{'x': 0, 'y':0}
+    Label:
+        text: 'New version updates coming soon, stay tuned!'
+        size_hint:.2,.1
+        pos_hint:{'x': .77, 'y':0}
+
+    Button:
+        text: 'Back'
+        size_hint: .19, .1
+        pos_hint:{'x': .0, 'y':0}
+        on_release:
+            app.root.current='first'
+            root.manager.transition.direction='right'
